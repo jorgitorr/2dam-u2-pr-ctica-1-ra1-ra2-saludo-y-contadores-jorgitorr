@@ -14,10 +14,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //pantallaBoton()
+                    dialogo()
                 }
             }
         }
@@ -53,7 +56,7 @@ class MainActivity : ComponentActivity() {
 
 //@Preview(showBackground = true)
 @Composable
-fun pantallaBoton(){
+fun pantallaBoton(nombre: String){
     val texto:String = ""
 
     Column(
@@ -77,33 +80,50 @@ fun pantallaBoton(){
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
-fun dialogo(){
+fun dialogo():String{
+    var cont by rememberSaveable { mutableStateOf(0) }
+    var text by rememberSaveable { mutableStateOf("") }
+
     Column(
         Modifier
             .fillMaxWidth()
-            .height(300.dp),
+            .height(250.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally){
         Text(text = "Configuracion",
-            Modifier.padding(bottom = 12.dp, start = 250.dp))
+            Modifier.padding(bottom = 5.dp, start = 250.dp))
+
+        OutlinedTextField(
+            value = text,
+            onValueChange = { text = it},
+            label = { Text(text = "Introduce tu nombre")},
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color.White,
+                unfocusedBorderColor = Color.White,
+                textColor = Color.Black))
+
+        Row (
+            Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center) {
+            Button(onClick = { cont++ }) {
+                Text(text = "Aceptar")
+            }
+            Button(onClick = { text = "" }, enabled = text.isNotEmpty()) {
+                Text(text = "Limpiar")
+            }
+            Button(onClick = { }) {
+                Text(text = "Cancelar")
+            }
+        }
+
     }
 
-    Row (Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center) {
-        Button(onClick = {  }) {
-            Text(text = "Aceptar")
-        }
-        Button(onClick = {  }) {
-            Text(text = "Limpiar")
-        }
-        Button(onClick = { }) {
-            Text(text = "Cancelar")
-        }
-    }
-
-
+return text
 
 }
