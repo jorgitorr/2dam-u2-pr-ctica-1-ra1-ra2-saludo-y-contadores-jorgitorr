@@ -5,8 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -41,7 +43,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    saludar()
+                    //pantallaBoton()
                 }
             }
         }
@@ -49,43 +51,59 @@ class MainActivity : ComponentActivity() {
 }
 
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
-fun saludar(){
+fun pantallaBoton(){
     val texto:String = ""
 
-    Row (
+    Column(
         Modifier.fillMaxSize(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ){
-        Button(modifier = Modifier.padding(bottom = 10.dp), onClick = { } ) {
+        Button(modifier = Modifier.padding(bottom = 10.dp), onClick = {
+
+        } ) {
             Text(text = "Saludar")
         }
-
+        Text(text = texto,
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .border(2.dp, Color.Black)
+                .height(50.dp)
+                .width(250.dp)
+                .wrapContentHeight(Alignment.CenterVertically))
     }
-
-    Text(text = texto,
-        fontSize = 20.sp,
-        textAlign = TextAlign.Center,
-        modifier = Modifier
-            .border(2.dp, Color.Black)
-            .height(50.dp)
-            .width(250.dp)
-            .wrapContentHeight(Alignment.CenterVertically))
-
-
-
-
 }
 
+@Preview(showBackground = true)
 @Composable
 fun dialogo(){
-    Dialog(onDismissRequest = { /*TODO*/ }) {
-        
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .height(300.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally){
+        Text(text = "Configuracion",
+            Modifier.padding(bottom = 12.dp, start = 250.dp))
     }
-    Button(onClick = {  }) {
 
+    Row (Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center) {
+        Button(onClick = {  }) {
+            Text(text = "Aceptar")
+        }
+        Button(onClick = {  }) {
+            Text(text = "Limpiar")
+        }
+        Button(onClick = { }) {
+            Text(text = "Cancelar")
+        }
     }
+
+
 
 }
