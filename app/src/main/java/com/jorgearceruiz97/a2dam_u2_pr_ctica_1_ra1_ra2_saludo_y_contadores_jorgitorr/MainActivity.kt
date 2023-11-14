@@ -90,7 +90,7 @@ fun dialogo():String{
     Column(
         Modifier
             .fillMaxWidth()
-            .height(250.dp),
+            .height(220.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally){
         Text(text = "Configuracion",
