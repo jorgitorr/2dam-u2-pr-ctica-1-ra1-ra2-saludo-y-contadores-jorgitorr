@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
 
 //@Preview(showBackground = true)
 @Composable
-fun pantallaBoton(nombre: String){
+fun pantallaBoton(nombre: String, cont:Int){
     val texto:String = ""
 
     Column(
@@ -83,18 +83,20 @@ fun pantallaBoton(nombre: String){
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
-fun dialogo():String{
-    var cont by rememberSaveable { mutableStateOf(0) }
+fun dialogo(){
+    var contAceptar by rememberSaveable { mutableStateOf(0) }
+    var contCancelar by rememberSaveable { mutableStateOf(0) }
     var text by rememberSaveable { mutableStateOf("") }
 
     Column(
         Modifier
             .fillMaxWidth()
-            .height(220.dp),
+            .height(220.dp)
+            .padding(top = 15.dp, bottom = 20.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally){
         Text(text = "Configuracion",
-            Modifier.padding(bottom = 5.dp, start = 250.dp))
+            Modifier.padding(bottom = 2.dp, start = 250.dp), fontSize = 20.sp)
 
         OutlinedTextField(
             value = text,
@@ -111,19 +113,17 @@ fun dialogo():String{
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center) {
-            Button(onClick = { cont++ }) {
+            Button(onClick = { contAceptar++ }) {
                 Text(text = "Aceptar")
             }
             Button(onClick = { text = "" }, enabled = text.isNotEmpty()) {
                 Text(text = "Limpiar")
             }
-            Button(onClick = { }) {
+            Button(onClick = { contCancelar++ }) {
                 Text(text = "Cancelar")
             }
         }
 
     }
-
-return text
 
 }
